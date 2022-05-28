@@ -1,6 +1,6 @@
-# batman
+# Batman Game 
 
-A new Flutter project.
+Amazing 2D game, Batman jumping and avoiding thugs in Gotham city.
 
 ## Getting Started
 
