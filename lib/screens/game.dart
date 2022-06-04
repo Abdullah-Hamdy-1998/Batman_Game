@@ -11,6 +11,7 @@ class game extends StatefulWidget {
 class _gameState extends State<game> with SingleTickerProviderStateMixin {
   Batman batman = Batman();
   double runDistance = 0;
+  double runVelocity = 30;
 
   late AnimationController controller;
   Duration lastUpdateCall = Duration();
@@ -32,22 +33,29 @@ class _gameState extends State<game> with SingleTickerProviderStateMixin {
 
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    Rect batmanRect = batman.getRect(screenSize, runDistance);
+
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          AnimatedBuilder(
-              animation: controller,
-              builder: (context, _) {
-                return Positioned(
-                    child: batman.render(),
-                    left: batmanRect.left,
-                    top: batmanRect.top,
-                    width: batmanRect.width,
-                    height: batmanRect.height);
-              }),
-        ],
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          batman.jump();
+        },
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            AnimatedBuilder(
+                animation: controller,
+                builder: (context, _) {
+                  Rect batmanRect = batman.getRect(screenSize, runDistance);
+                  return Positioned(
+                      child: batman.render(),
+                      left: batmanRect.left,
+                      top: batmanRect.top,
+                      width: batmanRect.width,
+                      height: batmanRect.height);
+                }),
+          ],
+        ),
       ),
     );
   }

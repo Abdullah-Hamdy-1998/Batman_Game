@@ -13,7 +13,6 @@ class _startingState extends State<starting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //Create a background image with the asset 'images/Batman.png' and set it to the background of the scaffold and add two buttons to the scaffold.
       backgroundColor: Colors.black,
       body: Container(
         decoration: BoxDecoration(

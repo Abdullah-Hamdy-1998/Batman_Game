@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:batman/constants.dart';
 import 'package:batman/game-object.dart';
 import 'package:batman/sprite.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,12 +37,15 @@ enum BatmanState { running, jumping, dead }
 
 class Batman extends GameObject {
   late Sprite currentSprite = batman[0];
+  double dispY = 0;
+  double velY = 0;
+  BatmanState state = BatmanState.running;
 
   @override
   Rect getRect(Size screenSize, double runDistance) {
     return Rect.fromLTWH(
-      screenSize.width / 15,
-      screenSize.height / 2 - currentSprite.imageHeight,
+      screenSize.width / 10,
+      screenSize.height / 2 - currentSprite.imageHeight - dispY,
       currentSprite.imageWidth.toDouble(),
       currentSprite.imageHeight.toDouble(),
     );
@@ -56,7 +60,25 @@ class Batman extends GameObject {
   }
 
   @override
-  void update(Duration lastUpdate, Duration currentTime) {
+  void update(Duration lastTime, Duration currentTime) {
     currentSprite = batman[(currentTime.inMilliseconds / 100).floor() % 5 + 1];
+
+    double elapsedTimeSeconds = (currentTime - lastTime).inMilliseconds / 1000;
+
+    dispY += velY * elapsedTimeSeconds;
+    if (dispY <= 0) {
+      dispY = 0;
+      velY = 0;
+      state = BatmanState.running;
+    } else {
+      velY -= GRAVITY_PPSS * elapsedTimeSeconds;
+    }
+  }
+
+  void jump() {
+    if (state != BatmanState.jumping) {
+      state = BatmanState.jumping;
+      velY = 650;
+    }
   }
 }
