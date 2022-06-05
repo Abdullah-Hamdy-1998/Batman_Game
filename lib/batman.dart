@@ -78,7 +78,11 @@ class Batman extends GameObject {
   void jump() {
     if (state != BatmanState.jumping) {
       state = BatmanState.jumping;
-      velY = 650;
+      velY = 1000;
     }
+  }
+    void die(){
+    currentSprite = batman[5];
+    state = BatmanState.dead;
   }
 }
