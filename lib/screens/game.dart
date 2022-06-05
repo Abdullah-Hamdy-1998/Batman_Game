@@ -113,7 +113,7 @@ class _gameState extends State<game> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     Size screensize = MediaQuery.of(context).size;
     List<Widget> childern = [];
-    for (GameObject object in [...clouds, ...ground, ...evil, bat]) {
+    for (GameObject object in [...ground, ...clouds, ...evil, bat]) {
       childern.add(AnimatedBuilder(
           animation: worldController,
           builder: (context, _) {

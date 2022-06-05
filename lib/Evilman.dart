@@ -28,7 +28,7 @@ class Evilman extends GameObject {
   Rect getRect(Size screensize, double runDistance) {
     return Rect.fromLTWH(
       (worldLocation.dx - runDistance) * WORLD_TO_PIXEL_RATIO,
-      screensize.height / 2 - sprite.imageHeight,
+      screensize.height - sprite.imageHeight - 10,
       sprite.imageHeight.toDouble(),
       sprite.imageWidth.toDouble(),
     );

@@ -45,7 +45,7 @@ class Batman extends GameObject {
   Rect getRect(Size screenSize, double runDistance) {
     return Rect.fromLTWH(
       screenSize.width / 10,
-      screenSize.height / 2 - currentSprite.imageHeight - dispY,
+      screenSize.height - currentSprite.imageHeight - dispY - 10,
       currentSprite.imageWidth.toDouble(),
       currentSprite.imageHeight.toDouble(),
     );
@@ -81,7 +81,8 @@ class Batman extends GameObject {
       velY = 1000;
     }
   }
-    void die(){
+
+  void die() {
     currentSprite = batman[5];
     state = BatmanState.dead;
   }
